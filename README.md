@@ -5,9 +5,9 @@ sources: https://github.com/hh-lohmann/jekyll-basal-scaffold
 ---
 
 
-.... ! jbs als Präfix einschmuggeln als Wiedererkennungswert - oder "hh"? ... oder "nat" für "NOT A THEME" ...
+.... ! jkBS als Präfix einschmuggeln als Wiedererkennungswert - oder "hh"? ... oder "nat" für "NOT A THEME" ...
 
-# jekyll-basal-scaffold
+# jekyll-basal-scaffold (jkBS)
 
 ***A basal, transparent, and portable scaffold for Jekyll (NOT A THEME)***
 
@@ -50,7 +50,7 @@ Coming near the **source** structure as depicted in [Jekyll's documentation](htt
     └── index.html
 ```
 
-... but still more reduced, and yet with the - standard Jekyll, but not mentioned above - "404" (here, same with "index", as MD, not HTML), `presets.yml` in `_data, `head.html` in `_includes`, and `main.html` instead of `default.html` in `_layouts` (see below), as well as, of course, `.gitignore`:
+... but still more reduced, and yet with the - standard Jekyll, but not mentioned above - "404" (here, same with "index", as MD, not HTML, see below), `presets.yml` in `_data, `main-head.md` and `main-` prefix in `_includes`, and `main-layout.md` instead of `default.html` in `_layouts` (see below), as well as, of course, `.gitignore`:
 
 ---
 ```sh
@@ -59,11 +59,11 @@ Coming near the **source** structure as depicted in [Jekyll's documentation](htt
     ├── _data
     |   ├── presets.yml
     ├── _includes
-    |   ├── footer.html
-    |   └── head.html
-    |   └── header.html
+    |   ├── main-footer.md
+    |   └── main-head.md
+    |   └── main-header.md
     ├── _layouts
-    |   ├── main.html
+    |   ├── main-layout.md
     ├── _site
     ├── .gitignore
     ├── .jekyll-metadata
@@ -103,6 +103,22 @@ Compared to `jekyll new`:
     * `_posts` is a crucial part in the design of Jekyll, but, on the one hand, may not be important for many environments, and, on the other hand, does not depend on a special position in the directory structure and should, also in this respect, be handled as rather content specific (like user defined [Collections](https://jekyllrb.com/docs/collections/)).
 
 
+## Changes
+
+Compared to `jekyll new`:
+
+* `.md` instead of `*.html` in the source directory
+    * ".md" should say clearly "this is a source file"
+    * `.md`'s typical file association to a Markdown editor should benefit your workflow
+    * :exclamation: note that this does not affect the functioning of includes concerning [Front matter variables](https://jekyllrb.com/docs/step-by-step/03-front-matter/)
+      * Generally Jekyll doesn't care about file extensions, i.e it opens all files in the source directory (that are not excluded by `_config.yml`) and parses those with textual content and processing Front matters and [Liquid Tags](https://jekyllrb.com/docs/step-by-step/02-liquid/#tags), but in files that are connectetd by the [`include` tag](https://jekyllrb.com/docs/includes/) only tags are processed, but no Front matters, i.e. Front matters will be output as literal file content (if not encapsualed in a [comment tag](https://shopify.github.io/liquid/tags/comment/) - note here that Liquid primarily is a "third party component" from Shopify what may explain the special behaviour with includes).
+* [`.gitignore`](https://git-scm.com/docs/gitignore)
+    * no mention of `.sass-cache` since Sass cache is deactivated by `_config.yml`
+    * `_site` commented out, uncomment with e.g. Git Hub Pages when developing with local builds, but pushing only source
+    * explanations for entries as comments in file
+* ... `_config.yml`... "description" etc. nach _data/presets.yml
+
+
 ## Additions
 
 Compared to `jekyll new`:
@@ -112,54 +128,44 @@ Compared to `jekyll new`:
     * `_config.yml` should configurate Jekyll, esp. the build process, but not content
     * also to illustrate the mechanics
 * `_includes` in the source directory with
-    * `footer.html`
-        * for inclusion in `main.html` as HTML `<footer></footer>`
+    * `main-footer.md`
+        * for inclusion in `main-layout.md` as HTML `<footer></footer>`
         * empty besides "footer"-Tag, mainly to illustrate the mechanics
-    * `head.html`
-        * for inclusion in `main.html` as HTML `<head></head>`
-    * `header.html`
-        * for inclusion in `main.html` as HTML `<header></header>`
+    * `main-head.md`
+        * for inclusion in `main-layout.md` as HTML `<head></head>`
+    * `main-header.md`
+        * for inclusion in `main-layout.md` as HTML `<header></header>`
         * empty besides "header"-Tag, mainly to illustrate the mechanics
-* `_layouts` in the source directory with `main.html` instead of `default.html`
+    * :bulb: the `main-` prefix makes explicit that these includes are meant for the `main-layout.md` layout 
+      * surely you could include them where you want, but the prefix informs about their primal intention
+      * for new / more special includes you should also set a speaking prefix for involved files, e.g. `post-`
+* `_layouts` in the source directory with `main-layout.md` instead of `default.html`
     * "main" expresses the non-technical reading of "default" as "for most cases"
         * note that in the proper technical definition a "default" may be exactly a case that never happens in reality
-    * "default" suggests "failed to provide a more suitable solution"
-        * a "default.html" would make sense if this file would step in if no layout was explicitly specified, but, on the contrary, you need to explicitly define "default" to use it
-
-
-## Changes
-
-Compared to `jekyll new`:
-
-* `index.md` and `404.md` instead of `*.html` in the source directory
-    * ".md" should make it clearer that this are content files
-        * other than the functional files in `_layouts` or files that are just copied to the output
-    * note that the resulting `404.html` only works under GitHub Pages and Ruby's [WEBrick server](http://ruby-doc.org/stdlib-2.0.0/libdoc/webrick/rdoc/WEBrick.html) behind `jekyll serve` without any [further steps](https://jekyllrb.com/tutorials/custom-404-page/)
-        * including a 404 in the scaffold is a strong reminder not to forget something that catches typos etc.
-* [`.gitignore`](https://git-scm.com/docs/gitignore)
-    * no mention of `.sass-cache` since Sass cache is deactivated by `_config.yml`
-    * `_site` commented out, uncomment with e.g. Git Hub Pages when developing with local builds, but pushing only source
-    * explanations for entries as comments in file
-* ... `_config.yml`... "description" etc. nach _data/presets.yml
+        * "default" suggests "failed to provide a more suitable solution"
+            * a "default.html" would make sense if this file would step in if no layout was explicitly specified, but, on the contrary, you need to explicitly define "default" to use it
+    * :bulb: the `-layout-` suffix makes explicit that this is a layout template - though that also follows directly from the containing directory and the utilisation by `layout: `, the suffix gives more overall transparency
 
 
 ## WONTFIX
 
 * no css, no js, no metadata, no libraries, no frameworks, no tools, no hooks, no admin, no preconfiguration
 
-This scaffold has to be basal, transparent, and portable. There should be no purpose or use case built in, it should rather be possible to use it even to compose program code out of building blocks, [dot graph](https://www.graphviz.org/) layouts, or anything else that has no deeper relationship to webpages and their properties besides that a web browser should be able to display it. So any "helpful preconfiguration" or anything that looks like will lead to something else and WILL NOT happen here.
+This scaffold has to be basal, transparent, and portable. There should be no purpose or use case built in, it should rather be possible to use it even to compose program code out of building blocks, databases, [dot graph](https://www.graphviz.org/) layouts, or anything else that has no deeper relationship to webpages and their properties besides that a web browser should be able to display it. So any "helpful preconfiguration" or anything that looks like will lead to something else and WILL NOT happen here.
 
 Pure skeleton, no flesh.
 
         
 ## Usage
 
-1. Fork or download.
+1. Fork / clone / download
 2. Check `.gitignore` for possible adjustments (see above)
 3. Change / add / delete files and their contents depending on your needs
     * ... besides this README file and the ...COPYING file ...
-    * tip: have a look at [Jekyll's manifold options and / or flags](https://jekyllrb.com/docs/configuration/) for the construction of content
+    * tip: have a look at [Jekyll's manifold options and / or flags](https://jekyllrb.com/docs/configuration/) for the de- / construction of content
       * esp. the `--config` option could be worth for a look
+
+Be aware that `404.html` in the output without any [further steps](https://jekyllrb.com/tutorials/custom-404-page/) only works under GitHub Pages and Ruby's [WEBrick server](http://ruby-doc.org/stdlib-2.0.0/libdoc/webrick/rdoc/WEBrick.html) behind `jekyll serve`. Including a 404 in the scaffold mainly is a strong reminder to not forget something that catches typos etc.
 
 
 ## Copyright / Warranty

@@ -1,10 +1,8 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <title>jbs - jekyll-basal-scaffold - A basal, transparent, and portable scaffold for Jekyll (NOT A THEME)</title>
+  <title>jkBS - jekyll-basal-scaffold - A basal, transparent, and portable scaffold for Jekyll (NOT A THEME)</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -19,9 +17,9 @@
 
 <hr />
 
-<p>…. ! jbs als Präfix einschmuggeln als Wiedererkennungswert - oder “hh”? … oder “nat” für “NOT A THEME” …</p>
+<p>…. ! jkBS als Präfix einschmuggeln als Wiedererkennungswert - oder “hh”? … oder “nat” für “NOT A THEME” …</p>
 
-<h1 id="jekyll-basal-scaffold">jekyll-basal-scaffold</h1>
+<h1 id="jekyll-basal-scaffold-jkbs">jekyll-basal-scaffold (jkBS)</h1>
 
 <p><strong><em>A basal, transparent, and portable scaffold for Jekyll (NOT A THEME)</em></strong></p>
 
@@ -61,7 +59,7 @@
     └── index.html
 </code></pre></div></div>
 
-<p>… but still more reduced, and yet with the - standard Jekyll, but not mentioned above - “404” (here, same with “index”, as MD, not HTML), <code class="highlighter-rouge">presets.yml</code> in <code class="highlighter-rouge">_data, </code>head.html<code class="highlighter-rouge"> in </code>_includes<code class="highlighter-rouge">, and </code>main.html<code class="highlighter-rouge"> instead of </code>default.html<code class="highlighter-rouge"> in </code>_layouts<code class="highlighter-rouge"> (see below), as well as, of course, </code>.gitignore`:</p>
+<p>… but still more reduced, and yet with the - standard Jekyll, but not mentioned above - “404” (here, same with “index”, as MD, not HTML, see below), <code class="highlighter-rouge">presets.yml</code> in <code class="highlighter-rouge">_data, </code>main-head.md<code class="highlighter-rouge"> and </code>main-<code class="highlighter-rouge"> prefix in </code>_includes<code class="highlighter-rouge">, and </code>main-layout.md<code class="highlighter-rouge"> instead of </code>default.html<code class="highlighter-rouge"> in </code>_layouts<code class="highlighter-rouge"> (see below), as well as, of course, </code>.gitignore`:</p>
 
 <hr />
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">.</span>
@@ -69,11 +67,11 @@
     ├── _data
     |   ├── presets.yml
     ├── _includes
-    |   ├── footer.html
-    |   └── head.html
-    |   └── header.html
+    |   ├── main-footer.md
+    |   └── main-head.md
+    |   └── main-header.md
     ├── _layouts
-    |   ├── main.html
+    |   ├── main-layout.md
     ├── _site
     ├── .gitignore
     ├── .jekyll-metadata
@@ -127,70 +125,18 @@
   </li>
 </ul>
 
-<h2 id="additions">Additions</h2>
-
-<p>Compared to <code class="highlighter-rouge">jekyll new</code>:</p>
-
-<ul>
-  <li><code class="highlighter-rouge">presets.yml</code> in <code class="highlighter-rouge">_data</code> in the source directory
-    <ul>
-      <li>… “description” etc. aus <code class="highlighter-rouge">_config.yml</code> …</li>
-      <li><code class="highlighter-rouge">_config.yml</code> should configurate Jekyll, esp. the build process, but not content</li>
-      <li>also to illustrate the mechanics</li>
-    </ul>
-  </li>
-  <li><code class="highlighter-rouge">_includes</code> in the source directory with
-    <ul>
-      <li><code class="highlighter-rouge">footer.html</code>
-        <ul>
-          <li>for inclusion in <code class="highlighter-rouge">main.html</code> as HTML <code class="highlighter-rouge">&lt;footer&gt;&lt;/footer&gt;</code></li>
-          <li>empty besides “footer”-Tag, mainly to illustrate the mechanics</li>
-        </ul>
-      </li>
-      <li><code class="highlighter-rouge">head.html</code>
-        <ul>
-          <li>for inclusion in <code class="highlighter-rouge">main.html</code> as HTML <code class="highlighter-rouge">&lt;head&gt;&lt;/head&gt;</code></li>
-        </ul>
-      </li>
-      <li><code class="highlighter-rouge">header.html</code>
-        <ul>
-          <li>for inclusion in <code class="highlighter-rouge">main.html</code> as HTML <code class="highlighter-rouge">&lt;header&gt;&lt;/header&gt;</code></li>
-          <li>empty besides “header”-Tag, mainly to illustrate the mechanics</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><code class="highlighter-rouge">_layouts</code> in the source directory with <code class="highlighter-rouge">main.html</code> instead of <code class="highlighter-rouge">default.html</code>
-    <ul>
-      <li>“main” expresses the non-technical reading of “default” as “for most cases”
-        <ul>
-          <li>note that in the proper technical definition a “default” may be exactly a case that never happens in reality</li>
-        </ul>
-      </li>
-      <li>“default” suggests “failed to provide a more suitable solution”
-        <ul>
-          <li>a “default.html” would make sense if this file would step in if no layout was explicitly specified, but, on the contrary, you need to explicitly define “default” to use it</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
 <h2 id="changes">Changes</h2>
 
 <p>Compared to <code class="highlighter-rouge">jekyll new</code>:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">index.md</code> and <code class="highlighter-rouge">404.md</code> instead of <code class="highlighter-rouge">*.html</code> in the source directory
+  <li><code class="highlighter-rouge">.md</code> instead of <code class="highlighter-rouge">*.html</code> in the source directory
     <ul>
-      <li>“.md” should make it clearer that this are content files
+      <li>“.md” should say clearly “this is a source file”</li>
+      <li><code class="highlighter-rouge">.md</code>’s typical file association to a Markdown editor should benefit your workflow</li>
+      <li>:exclamation: note that this does not affect the functioning of includes concerning <a href="https://jekyllrb.com/docs/step-by-step/03-front-matter/">Front matter variables</a>
         <ul>
-          <li>other than the functional files in <code class="highlighter-rouge">_layouts</code> or files that are just copied to the output</li>
-        </ul>
-      </li>
-      <li>note that the resulting <code class="highlighter-rouge">404.html</code> only works under GitHub Pages and Ruby’s <a href="http://ruby-doc.org/stdlib-2.0.0/libdoc/webrick/rdoc/WEBrick.html">WEBrick server</a> behind <code class="highlighter-rouge">jekyll serve</code> without any <a href="https://jekyllrb.com/tutorials/custom-404-page/">further steps</a>
-        <ul>
-          <li>including a 404 in the scaffold is a strong reminder not to forget something that catches typos etc.</li>
+          <li>Generally Jekyll doesn’t care about file extensions, i.e it opens all files in the source directory (that are not excluded by <code class="highlighter-rouge">_config.yml</code>) and parses those with textual content and processing Front matters and <a href="https://jekyllrb.com/docs/step-by-step/02-liquid/#tags">Liquid Tags</a>, but in files that are connectetd by the <a href="https://jekyllrb.com/docs/includes/"><code class="highlighter-rouge">include</code> tag</a> only tags are processed, but no Front matters, i.e. Front matters will be output as literal file content (if not encapsualed in a <a href="https://shopify.github.io/liquid/tags/comment/">comment tag</a> - note here that Liquid primarily is a “third party component” from Shopify what may explain the special behaviour with includes).</li>
         </ul>
       </li>
     </ul>
@@ -205,25 +151,81 @@
   <li>… <code class="highlighter-rouge">_config.yml</code>… “description” etc. nach _data/presets.yml</li>
 </ul>
 
+<h2 id="additions">Additions</h2>
+
+<p>Compared to <code class="highlighter-rouge">jekyll new</code>:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">presets.yml</code> in <code class="highlighter-rouge">_data</code> in the source directory
+    <ul>
+      <li>… “description” etc. aus <code class="highlighter-rouge">_config.yml</code> …</li>
+      <li><code class="highlighter-rouge">_config.yml</code> should configurate Jekyll, esp. the build process, but not content</li>
+      <li>also to illustrate the mechanics</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">_includes</code> in the source directory with
+    <ul>
+      <li><code class="highlighter-rouge">main-footer.md</code>
+        <ul>
+          <li>for inclusion in <code class="highlighter-rouge">main-layout.md</code> as HTML <code class="highlighter-rouge">&lt;footer&gt;&lt;/footer&gt;</code></li>
+          <li>empty besides “footer”-Tag, mainly to illustrate the mechanics</li>
+        </ul>
+      </li>
+      <li><code class="highlighter-rouge">main-head.md</code>
+        <ul>
+          <li>for inclusion in <code class="highlighter-rouge">main-layout.md</code> as HTML <code class="highlighter-rouge">&lt;head&gt;&lt;/head&gt;</code></li>
+        </ul>
+      </li>
+      <li><code class="highlighter-rouge">main-header.md</code>
+        <ul>
+          <li>for inclusion in <code class="highlighter-rouge">main-layout.md</code> as HTML <code class="highlighter-rouge">&lt;header&gt;&lt;/header&gt;</code></li>
+          <li>empty besides “header”-Tag, mainly to illustrate the mechanics</li>
+        </ul>
+      </li>
+      <li>:bulb: the <code class="highlighter-rouge">main-</code> prefix makes explicit that these includes are meant for the <code class="highlighter-rouge">main-layout.md</code> layout
+        <ul>
+          <li>surely you could include them where you want, but the prefix informs about their primal intention</li>
+          <li>for new / more special includes you should also set a speaking prefix for involved files, e.g. <code class="highlighter-rouge">post-</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">_layouts</code> in the source directory with <code class="highlighter-rouge">main-layout.md</code> instead of <code class="highlighter-rouge">default.html</code>
+    <ul>
+      <li>“main” expresses the non-technical reading of “default” as “for most cases”
+        <ul>
+          <li>note that in the proper technical definition a “default” may be exactly a case that never happens in reality</li>
+          <li>“default” suggests “failed to provide a more suitable solution”
+            <ul>
+              <li>a “default.html” would make sense if this file would step in if no layout was explicitly specified, but, on the contrary, you need to explicitly define “default” to use it</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>:bulb: the <code class="highlighter-rouge">-layout-</code> suffix makes explicit that this is a layout template - though that also follows directly from the containing directory and the utilisation by <code class="highlighter-rouge">layout: </code>, the suffix gives more overall transparency</li>
+    </ul>
+  </li>
+</ul>
+
 <h2 id="wontfix">WONTFIX</h2>
 
 <ul>
   <li>no css, no js, no metadata, no libraries, no frameworks, no tools, no hooks, no admin, no preconfiguration</li>
 </ul>
 
-<p>This scaffold has to be basal, transparent, and portable. There should be no purpose or use case built in, it should rather be possible to use it even to compose program code out of building blocks, <a href="https://www.graphviz.org/">dot graph</a> layouts, or anything else that has no deeper relationship to webpages and their properties besides that a web browser should be able to display it. So any “helpful preconfiguration” or anything that looks like will lead to something else and WILL NOT happen here.</p>
+<p>This scaffold has to be basal, transparent, and portable. There should be no purpose or use case built in, it should rather be possible to use it even to compose program code out of building blocks, databases, <a href="https://www.graphviz.org/">dot graph</a> layouts, or anything else that has no deeper relationship to webpages and their properties besides that a web browser should be able to display it. So any “helpful preconfiguration” or anything that looks like will lead to something else and WILL NOT happen here.</p>
 
 <p>Pure skeleton, no flesh.</p>
 
 <h2 id="usage">Usage</h2>
 
 <ol>
-  <li>Fork or download.</li>
+  <li>Fork / clone / download</li>
   <li>Check <code class="highlighter-rouge">.gitignore</code> for possible adjustments (see above)</li>
   <li>Change / add / delete files and their contents depending on your needs
     <ul>
       <li>… besides this README file and the …COPYING file …</li>
-      <li>tip: have a look at <a href="https://jekyllrb.com/docs/configuration/">Jekyll’s manifold options and / or flags</a> for the construction of content
+      <li>tip: have a look at <a href="https://jekyllrb.com/docs/configuration/">Jekyll’s manifold options and / or flags</a> for the de- / construction of content
         <ul>
           <li>esp. the <code class="highlighter-rouge">--config</code> option could be worth for a look</li>
         </ul>
@@ -231,6 +233,8 @@
     </ul>
   </li>
 </ol>
+
+<p>Be aware that <code class="highlighter-rouge">404.html</code> in the output without any <a href="https://jekyllrb.com/tutorials/custom-404-page/">further steps</a> only works under GitHub Pages and Ruby’s <a href="http://ruby-doc.org/stdlib-2.0.0/libdoc/webrick/rdoc/WEBrick.html">WEBrick server</a> behind <code class="highlighter-rouge">jekyll serve</code>. Including a 404 in the scaffold mainly is a strong reminder to not forget something that catches typos etc.</p>
 
 <h2 id="copyright--warranty">Copyright / Warranty</h2>
 
