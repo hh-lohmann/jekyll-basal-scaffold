@@ -98,7 +98,7 @@ Compared to `jekyll new`:
 * no Sass cache: adding [`cache: false` under `sass:` in `_config.yml`](https://github.com/jekyll/jekyll-sass-converter/issues/49#issuecomment-212600316)
     * effects in no `.sass-cache` in the source directory
 * no `Gemfile` / `Gemfile.lock` in the source directory
-    * A `Gemfile` and its accompanying `Gemfile.lock` are part of Ruby programs distributed as "gems" (packages) via [RubyGems package manager](https://rubygems.org/) and describe dependencies of a given gem like "command line Jekyll" (<https://rubygems.org/gems/jekyll/>). Jekyll instruments its `Gemfile` to make projects more portable since the statements in the `Gemfile` define the environment that is required to run without errors - but effectively it can make projects less portable since a certain environment is required. In practice a `Gemfile` makes sense if you are using very special features of Jekyll, a theme, plugins etc. that may fail even with another version of Jekyll, a theme, plugins etc., but in that case you should be experienced enough to maintain a `Gemfile` that fits your needs on your own and better not rely on a default `Gemfile`, or if in a special scenario required "settings" are clearly given as for [local Jekyll vs. GitHub Pages](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/) or for [Jekyll under Windows](https://jekyllrb.com/docs/installation/windows/).
+    * A `Gemfile` and its accompanying `Gemfile.lock` are part of Ruby programs distributed as "gems" (packages) via [RubyGems package manager](https://rubygems.org/) and describe dependencies of a given gem like "command line Jekyll" (<https://rubygems.org/gems/jekyll/>). Jekyll instruments its `Gemfile` [to make projects more portable](https://jekyllrb.com/docs/ruby-101/#bundler) since the statements in the `Gemfile` define the environment that is required to run without errors - but effectively it can make projects less portable since a certain environment is required. In practice a `Gemfile` makes sense if you are using very special features of Jekyll, a theme, plugins etc. that may fail even with another version of Jekyll, a theme, plugins etc., but in that case you should be experienced enough to maintain a `Gemfile` that fits your needs on your own and better not rely on a default `Gemfile`, or if in a special scenario required "settings" are clearly given as for [local Jekyll vs. GitHub Pages](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/) or for [Jekyll under Windows](https://jekyllrb.com/docs/installation/windows/).
 * no `_posts` (not in the source directory and so not as default in the output)
     * `_posts` is a crucial part in the design of Jekyll, but, on the one hand, may not be important for many environments, and, on the other hand, does not depend on a special position in the directory structure and should, also in this respect, be handled as rather content specific (like user defined [Collections](https://jekyllrb.com/docs/collections/)).
 
@@ -134,6 +134,8 @@ Compared to `jekyll new`:
 * `index.md` and `404.md` instead of `*.html` in the source directory
     * ".md" should make it clearer that this are content files
         * other than the functional files in `_layouts` or files that are just copied to the output
+    * note that the resulting `404.html` only works under GitHub Pages and Ruby's [WEBrick server](http://ruby-doc.org/stdlib-2.0.0/libdoc/webrick/rdoc/WEBrick.html) behind `jekyll serve` without any [further steps](https://jekyllrb.com/tutorials/custom-404-page/)
+        * including a 404 in the scaffold is a strong reminder not to forget something that catches typos etc.
 * [`.gitignore`](https://git-scm.com/docs/gitignore)
     * no mention of `.sass-cache` since Sass cache is deactivated by `_config.yml`
     * `_site` commented out, uncomment with e.g. Git Hub Pages when developing with local builds, but pushing only source
@@ -143,7 +145,7 @@ Compared to `jekyll new`:
 
 ## WONTFIX
 
-* no css, no js, no metadata, no libraries, no frameworks, no tools, no hooks, no admin
+* no css, no js, no metadata, no libraries, no frameworks, no tools, no hooks, no admin, no preconfiguration
 
 This scaffold has to be basal, transparent, and portable. There should be no purpose or use case built in, it should rather be possible to use it even to compose program code out of building blocks, [dot graph](https://www.graphviz.org/) layouts, or anything else that has no deeper relationship to webpages and their properties besides that a web browser should be able to display it. So any "helpful preconfiguration" or anything that looks like will lead to something else and WILL NOT happen here.
 
@@ -156,6 +158,8 @@ Pure skeleton, no flesh.
 2. Check `.gitignore` for possible adjustments (see above)
 3. Change / add / delete files and their contents depending on your needs
     * ... besides this README file and the ...COPYING file ...
+    * tip: have a look at [Jekyll's manifold options and / or flags](https://jekyllrb.com/docs/configuration/) for the construction of content
+      * esp. the `--config` option could be worth for a look
 
 
 ## Copyright / Warranty

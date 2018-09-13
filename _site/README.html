@@ -96,7 +96,7 @@
   </li>
   <li>no <code class="highlighter-rouge">Gemfile</code> / <code class="highlighter-rouge">Gemfile.lock</code> in the source directory
     <ul>
-      <li>A <code class="highlighter-rouge">Gemfile</code> and its accompanying <code class="highlighter-rouge">Gemfile.lock</code> are part of Ruby programs distributed as “gems” (packages) via <a href="https://rubygems.org/">RubyGems package manager</a> and describe dependencies of a given gem like “command line Jekyll” (<a href="https://rubygems.org/gems/jekyll/">https://rubygems.org/gems/jekyll/</a>). Jekyll instruments its <code class="highlighter-rouge">Gemfile</code> to make projects more portable since the statements in the <code class="highlighter-rouge">Gemfile</code> define the environment that is required to run without errors - but effectively it can make projects less portable since a certain environment is required. In practice a <code class="highlighter-rouge">Gemfile</code> makes sense if you are using very special features of Jekyll, a theme, plugins etc. that may fail even with another version of Jekyll, a theme, plugins etc., but in that case you should be experienced enough to maintain a <code class="highlighter-rouge">Gemfile</code> that fits your needs on your own and better not rely on a default <code class="highlighter-rouge">Gemfile</code>, or if in a special scenario required “settings” are clearly given as for <a href="https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/">local Jekyll vs. GitHub Pages</a> or for <a href="https://jekyllrb.com/docs/installation/windows/">Jekyll under Windows</a>.</li>
+      <li>A <code class="highlighter-rouge">Gemfile</code> and its accompanying <code class="highlighter-rouge">Gemfile.lock</code> are part of Ruby programs distributed as “gems” (packages) via <a href="https://rubygems.org/">RubyGems package manager</a> and describe dependencies of a given gem like “command line Jekyll” (<a href="https://rubygems.org/gems/jekyll/">https://rubygems.org/gems/jekyll/</a>). Jekyll instruments its <code class="highlighter-rouge">Gemfile</code> <a href="https://jekyllrb.com/docs/ruby-101/#bundler">to make projects more portable</a> since the statements in the <code class="highlighter-rouge">Gemfile</code> define the environment that is required to run without errors - but effectively it can make projects less portable since a certain environment is required. In practice a <code class="highlighter-rouge">Gemfile</code> makes sense if you are using very special features of Jekyll, a theme, plugins etc. that may fail even with another version of Jekyll, a theme, plugins etc., but in that case you should be experienced enough to maintain a <code class="highlighter-rouge">Gemfile</code> that fits your needs on your own and better not rely on a default <code class="highlighter-rouge">Gemfile</code>, or if in a special scenario required “settings” are clearly given as for <a href="https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/">local Jekyll vs. GitHub Pages</a> or for <a href="https://jekyllrb.com/docs/installation/windows/">Jekyll under Windows</a>.</li>
     </ul>
   </li>
   <li>no <code class="highlighter-rouge">_posts</code> (not in the source directory and so not as default in the output)
@@ -167,6 +167,11 @@
           <li>other than the functional files in <code class="highlighter-rouge">_layouts</code> or files that are just copied to the output</li>
         </ul>
       </li>
+      <li>note that the resulting <code class="highlighter-rouge">404.html</code> only works under GitHub Pages and Ruby’s <a href="http://ruby-doc.org/stdlib-2.0.0/libdoc/webrick/rdoc/WEBrick.html">WEBrick server</a> behind <code class="highlighter-rouge">jekyll serve</code> without any <a href="https://jekyllrb.com/tutorials/custom-404-page/">further steps</a>
+        <ul>
+          <li>including a 404 in the scaffold is a strong reminder not to forget something that catches typos etc.</li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li><a href="https://git-scm.com/docs/gitignore"><code class="highlighter-rouge">.gitignore</code></a>
@@ -182,7 +187,7 @@
 <h2 id="wontfix">WONTFIX</h2>
 
 <ul>
-  <li>no css, no js, no metadata, no libraries, no frameworks, no tools, no hooks, no admin</li>
+  <li>no css, no js, no metadata, no libraries, no frameworks, no tools, no hooks, no admin, no preconfiguration</li>
 </ul>
 
 <p>This scaffold has to be basal, transparent, and portable. There should be no purpose or use case built in, it should rather be possible to use it even to compose program code out of building blocks, <a href="https://www.graphviz.org/">dot graph</a> layouts, or anything else that has no deeper relationship to webpages and their properties besides that a web browser should be able to display it. So any “helpful preconfiguration” or anything that looks like will lead to something else and WILL NOT happen here.</p>
@@ -197,6 +202,11 @@
   <li>Change / add / delete files and their contents depending on your needs
     <ul>
       <li>… besides this README file and the …COPYING file …</li>
+      <li>tip: have a look at <a href="https://jekyllrb.com/docs/configuration/">Jekyll’s manifold options and / or flags</a> for the construction of content
+        <ul>
+          <li>esp. the <code class="highlighter-rouge">--config</code> option could be worth for a look</li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ol>
