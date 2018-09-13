@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>jbs - jekyll-basal-scaffold - A basal, transparent, and portable scaffold for Jekyll (NOT A THEME)</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<header>
+</header><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <hr />
+
+<p>sources: https://github.com/hh-lohmann/jekyll-basal-scaffold</p>
+
+<hr />
+
+<p>…. ! jbs als Präfix einschmuggeln als Wiedererkennungswert - oder “hh”? … oder “nat” für “NOT A THEME” …</p>
+
+<h1 id="jekyll-basal-scaffold">jekyll-basal-scaffold</h1>
+
+<p><strong><em>A basal, transparent, and portable scaffold for Jekyll (NOT A THEME)</em></strong></p>
+
+<p>Meant for a quick initialization of a full functional <a href="https://jekyllrb.com/">Jekyll</a> environment without stumbling over the fuzzes of <em>feature packed</em> themes and dependencies.</p>
+
+<h2 id="background">Background</h2>
+
+<p><code class="highlighter-rouge">jekyll new</code> creates an environment with rather demonstrational and often unneeded stuff, while at the same time some things seem to miss. A top example is Jekyll’s default <a href="https://github.com/jekyll/minima">minima</a> theme that at the same time produces an <code class="highlighter-rouge">assets</code> directory in the output while hiding important mechanics like the <code class="highlighter-rouge">_includes</code> and <code class="highlighter-rouge">_layouts</code> folders in its <a href="https://guides.rubygems.org/command-reference/#gem-environment">RubyGems <code class="highlighter-rouge">gemdir</code> directory</a>. This may hinder quick understanding for what’s going on under the hood and of course is not portable at all (see considerations for the <code class="highlighter-rouge">Gemfile</code> below).</p>
+
+<p>Note that the <a href="https://github.com/jekyll/jekyll/blob/0728ccf08b08759d75b6bac40091151a80556565/lib/jekyll/commands/new.rb#L15"><code class="highlighter-rouge">--blank</code> option</a> for <code class="highlighter-rouge">jekyll new</code> gives you a source directory without a theme and its impacts, but also without <code class="highlighter-rouge">_includes</code> and some other things.</p>
+
+<h2 id="goal">Goal</h2>
+
+<p>Coming near the <strong>source</strong> structure as depicted in <a href="https://jekyllrb.com/docs/structure/">Jekyll’s documentation</a>:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">.</span>
+    ├── _config.yml
+    ├── _data
+    |   └── members.yml
+    ├── _drafts
+    |   ├── begin-with-the-crazy-ideas.md
+    |   └── on-simplicity-in-technology.md
+    ├── _includes
+    |   ├── footer.html
+    |   └── header.html
+    ├── _layouts
+    |   ├── default.html
+    |   └── post.html
+    ├── _posts
+    |   ├── 2007-10-29-why-every-programmer-should-play-nethack.md
+    |   └── 2009-04-26-barcamp-boston-4-roundup.md
+    ├── _sass
+    |   ├── _base.scss
+    |   └── _layout.scss
+    ├── _site
+    ├── .jekyll-metadata
+    └── index.html
+</code></pre></div></div>
+
+<p>… but still more reduced, and yet with the - standard Jekyll, but not mentioned above - “404” (here, same with “index”, as MD, not HTML), <code class="highlighter-rouge">presets.yml</code> in <code class="highlighter-rouge">_data, </code>head.html<code class="highlighter-rouge"> in </code>_includes<code class="highlighter-rouge">, and </code>main.html<code class="highlighter-rouge"> instead of </code>default.html<code class="highlighter-rouge"> in </code>_layouts<code class="highlighter-rouge"> (see below), as well as, of course, </code>.gitignore`:</p>
+
+<hr />
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">.</span>
+    ├── _config.yml
+    ├── _data
+    |   ├── presets.yml
+    ├── _includes
+    |   ├── footer.html
+    |   └── head.html
+    |   └── header.html
+    ├── _layouts
+    |   ├── main.html
+    ├── _site
+    ├── .gitignore
+    ├── .jekyll-metadata
+    ├── 404.md
+    └── index.md
+</code></pre></div></div>
+<hr />
+
+<p>Note that <code class="highlighter-rouge">_site</code> and <code class="highlighter-rouge">.jekyll-metadata</code> are resulting unavoidable from Jekyll builds <em>in local directories</em>. On GitHub Pages the Jekyll build process stages behind the curtain, so you won’t have them there (if you are using a local Jekyll for development befor publishing on GitHub Pages, the <code class="highlighter-rouge">.gitignore</code> should keep them local).</p>
+
+<p>The <strong>output</strong> structure and contents of the “empty” scaffold alone should be like this:</p>
+
+<hr />
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">.</span>
+    ├── 404.html
+    └── index.html
+</code></pre></div></div>
+<hr />
+
+<p>Anything else that is output will come from your content, not from the scaffold or from hidden defaults like the <a href="https://github.com/jekyll/jekyll-feed"><code class="highlighter-rouge">jekyll feed</code> plugin</a> - of course you may add such features as you like, but esp. a default feed mechanism you are not aware of might be a way to your data you are not aware of.</p>
+
+<h2 id="prunings">Prunings</h2>
+
+<p>Compared to <code class="highlighter-rouge">jekyll new</code>:</p>
+
+<ul>
+  <li>theme (mimima): deleting <code class="highlighter-rouge">minima</code> for <code class="highlighter-rouge">theme:</code> in <code class="highlighter-rouge">_config.yml</code>
+    <ul>
+      <li>effects in no <code class="highlighter-rouge">about.md</code> in the source directory and no <code class="highlighter-rouge">about</code> and <code class="highlighter-rouge">assets</code> in the output</li>
+    </ul>
+  </li>
+  <li>feeds: deleting <code class="highlighter-rouge">-jekyll-feed</code> under <code class="highlighter-rouge">plugins:</code> in <code class="highlighter-rouge">_config.yml</code>
+    <ul>
+      <li>effects in no <code class="highlighter-rouge">feed.xml</code> in the output</li>
+    </ul>
+  </li>
+  <li>no Sass cache: adding <a href="https://github.com/jekyll/jekyll-sass-converter/issues/49#issuecomment-212600316"><code class="highlighter-rouge">cache: false</code> under <code class="highlighter-rouge">sass:</code> in <code class="highlighter-rouge">_config.yml</code></a>
+    <ul>
+      <li>effects in no <code class="highlighter-rouge">.sass-cache</code> in the source directory</li>
+    </ul>
+  </li>
+  <li>no <code class="highlighter-rouge">Gemfile</code> / <code class="highlighter-rouge">Gemfile.lock</code> in the source directory
+    <ul>
+      <li>A <code class="highlighter-rouge">Gemfile</code> and its accompanying <code class="highlighter-rouge">Gemfile.lock</code> are part of Ruby programs distributed as “gems” (packages) via <a href="https://rubygems.org/">RubyGems package manager</a> and describe dependencies of a given gem like “command line Jekyll” (<a href="https://rubygems.org/gems/jekyll/">https://rubygems.org/gems/jekyll/</a>). Jekyll instruments its <code class="highlighter-rouge">Gemfile</code> to make projects more portable since the statements in the <code class="highlighter-rouge">Gemfile</code> define the environment that is required to run without errors - but effectively it can make projects less portable since a certain environment is required. In practice a <code class="highlighter-rouge">Gemfile</code> makes sense if you are using very special features of Jekyll, a theme, plugins etc. that may fail even with another version of Jekyll, a theme, plugins etc., but in that case you should be experienced enough to maintain a <code class="highlighter-rouge">Gemfile</code> that fits your needs on your own and better not rely on a default <code class="highlighter-rouge">Gemfile</code>, or if in a special scenario required “settings” are clearly given as for <a href="https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/">local Jekyll vs. GitHub Pages</a> or for <a href="https://jekyllrb.com/docs/installation/windows/">Jekyll under Windows</a>.</li>
+    </ul>
+  </li>
+  <li>no <code class="highlighter-rouge">_posts</code> (not in the source directory and so not as default in the output)
+    <ul>
+      <li><code class="highlighter-rouge">_posts</code> is a crucial part in the design of Jekyll, but, on the one hand, may not be important for many environments, and, on the other hand, does not depend on a special position in the directory structure and should, also in this respect, be handled as rather content specific (like user defined <a href="https://jekyllrb.com/docs/collections/">Collections</a>).</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="additions">Additions</h2>
+
+<p>Compared to <code class="highlighter-rouge">jekyll new</code>:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">presets.yml</code> in <code class="highlighter-rouge">_data</code> in the source directory
+    <ul>
+      <li>… “description” etc. aus <code class="highlighter-rouge">_config.yml</code> …</li>
+      <li><code class="highlighter-rouge">_config.yml</code> should configurate Jekyll, esp. the build process, but not content</li>
+      <li>also to illustrate the mechanics</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">_includes</code> in the source directory with
+    <ul>
+      <li><code class="highlighter-rouge">footer.html</code>
+        <ul>
+          <li>for inclusion in <code class="highlighter-rouge">main.html</code> as HTML <code class="highlighter-rouge">&lt;footer&gt;&lt;/footer&gt;</code></li>
+          <li>empty besides “footer”-Tag, mainly to illustrate the mechanics</li>
+        </ul>
+      </li>
+      <li><code class="highlighter-rouge">head.html</code>
+        <ul>
+          <li>for inclusion in <code class="highlighter-rouge">main.html</code> as HTML <code class="highlighter-rouge">&lt;head&gt;&lt;/head&gt;</code></li>
+        </ul>
+      </li>
+      <li><code class="highlighter-rouge">header.html</code>
+        <ul>
+          <li>for inclusion in <code class="highlighter-rouge">main.html</code> as HTML <code class="highlighter-rouge">&lt;header&gt;&lt;/header&gt;</code></li>
+          <li>empty besides “header”-Tag, mainly to illustrate the mechanics</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">_layouts</code> in the source directory with <code class="highlighter-rouge">main.html</code> instead of <code class="highlighter-rouge">default.html</code>
+    <ul>
+      <li>“main” expresses the non-technical reading of “default” as “for most cases”
+        <ul>
+          <li>note that in the proper technical definition a “default” may be exactly a case that never happens in reality</li>
+        </ul>
+      </li>
+      <li>“default” suggests “failed to provide a more suitable solution”
+        <ul>
+          <li>a “default.html” would make sense if this file would step in if no layout was explicitly specified, but, on the contrary, you need to explicitly define “default” to use it</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="changes">Changes</h2>
+
+<p>Compared to <code class="highlighter-rouge">jekyll new</code>:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">index.md</code> and <code class="highlighter-rouge">404.md</code> instead of <code class="highlighter-rouge">*.html</code> in the source directory
+    <ul>
+      <li>“.md” should make it clearer that this are content files
+        <ul>
+          <li>other than the functional files in <code class="highlighter-rouge">_layouts</code> or files that are just copied to the output</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="https://git-scm.com/docs/gitignore"><code class="highlighter-rouge">.gitignore</code></a>
+    <ul>
+      <li>no mention of <code class="highlighter-rouge">.sass-cache</code> since Sass cache is deactivated by <code class="highlighter-rouge">_config.yml</code></li>
+      <li><code class="highlighter-rouge">_site</code> commented out, uncomment with e.g. Git Hub Pages when developing with local builds, but pushing only source</li>
+      <li>explanations for entries as comments in file</li>
+    </ul>
+  </li>
+  <li>… <code class="highlighter-rouge">_config.yml</code>… “description” etc. nach _data/presets.yml</li>
+</ul>
+
+<h2 id="wontfix">WONTFIX</h2>
+
+<ul>
+  <li>no css, no js, no metadata, no libraries, no frameworks, no tools, no hooks, no admin</li>
+</ul>
+
+<p>This scaffold has to be basal, transparent, and portable. There should be no purpose or use case built in, it should rather be possible to use it even to compose program code out of building blocks, <a href="https://www.graphviz.org/">dot graph</a> layouts, or anything else that has no deeper relationship to webpages and their properties besides that a web browser should be able to display it. So any “helpful preconfiguration” or anything that looks like will lead to something else and WILL NOT happen here.</p>
+
+<p>Pure skeleton, no flesh.</p>
+
+<h2 id="usage">Usage</h2>
+
+<ol>
+  <li>Fork or download.</li>
+  <li>Check <code class="highlighter-rouge">.gitignore</code> for possible adjustments (see above)</li>
+  <li>Change / add / delete files and their contents depending on your needs
+    <ul>
+      <li>… besides this README file and the …COPYING file …</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="copyright--warranty">Copyright / Warranty</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    MIT License
+
+    Copyright (c) 2018 hh.lohmann@yahoo.de
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+</code></pre></div></div>
+
+      </div>
+    </main>
+
+<footer>
+</footer></body>
+</html>
