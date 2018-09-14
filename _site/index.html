@@ -59,7 +59,7 @@
     └── index.html
 </code></pre></div></div>
 
-<p>… but still more reduced, and yet with the - standard Jekyll, but not mentioned above - “404” (here, same with “index”, as MD, not HTML, see below), <code class="highlighter-rouge">presets.yml</code> in <code class="highlighter-rouge">_data, </code>main-head.md<code class="highlighter-rouge"> and </code>main-<code class="highlighter-rouge"> prefix in </code>_includes<code class="highlighter-rouge">, and </code>main-layout.md<code class="highlighter-rouge"> instead of </code>default.html<code class="highlighter-rouge"> in </code>_layouts<code class="highlighter-rouge"> (see below), as well as, of course, </code>.gitignore`:</p>
+<p>… but still more reduced, and yet with the - standard Jekyll, but not mentioned above - “404” (like other files as MD, not HTML, see below), a new file <code class="highlighter-rouge">presets.yml</code> in <code class="highlighter-rouge">_data, </code>main-head.md<code class="highlighter-rouge"> and </code>main-<code class="highlighter-rouge"> prefix in </code>_includes<code class="highlighter-rouge">, and </code>main-layout.md<code class="highlighter-rouge"> instead of </code>default.html<code class="highlighter-rouge"> in </code>_layouts<code class="highlighter-rouge"> (see below), as well as, of course, </code>.gitignore`:</p>
 
 <hr />
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">.</span>
@@ -91,7 +91,7 @@
 </code></pre></div></div>
 <hr />
 
-<p>Anything else that is output will come from your content, not from the scaffold or from hidden defaults like the <a href="https://github.com/jekyll/jekyll-feed"><code class="highlighter-rouge">jekyll feed</code> plugin</a> - of course you may add such features as you like, but esp. a default feed mechanism you are not aware of might be a way to your data you are not aware of.</p>
+<p>Anything else that is output will come from your content, not from the scaffold or from hidden defaults like the <a href="https://github.com/jekyll/jekyll-feed"><code class="highlighter-rouge">jekyll feed</code> plugin</a> - of course you may add such features as you like, but esp. a default feed mechanism you are not aware of might be a way to your data that you are not aware of.</p>
 
 <h2 id="prunings">Prunings</h2>
 
@@ -115,10 +115,10 @@
   </li>
   <li>no <code class="highlighter-rouge">Gemfile</code> / <code class="highlighter-rouge">Gemfile.lock</code> in the source directory
     <ul>
-      <li>A <code class="highlighter-rouge">Gemfile</code> and its accompanying <code class="highlighter-rouge">Gemfile.lock</code> are part of Ruby programs distributed as “gems” (packages) via <a href="https://rubygems.org/">RubyGems package manager</a> and describe dependencies of a given gem like “command line Jekyll” (<a href="https://rubygems.org/gems/jekyll/">https://rubygems.org/gems/jekyll/</a>). Jekyll instruments its <code class="highlighter-rouge">Gemfile</code> <a href="https://jekyllrb.com/docs/ruby-101/#bundler">to make projects more portable</a> since the statements in the <code class="highlighter-rouge">Gemfile</code> define the environment that is required to run without errors - but effectively it can make projects less portable since a certain environment is required. In practice a <code class="highlighter-rouge">Gemfile</code> makes sense if you are using very special features of Jekyll, a theme, plugins etc. that may fail even with another version of Jekyll, a theme, plugins etc., but in that case you should be experienced enough to maintain a <code class="highlighter-rouge">Gemfile</code> that fits your needs on your own and better not rely on a default <code class="highlighter-rouge">Gemfile</code>, or if in a special scenario required “settings” are clearly given as for <a href="https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/">local Jekyll vs. GitHub Pages</a> or for <a href="https://jekyllrb.com/docs/installation/windows/">Jekyll under Windows</a>.</li>
+      <li>A <code class="highlighter-rouge">Gemfile</code> and its accompanying <code class="highlighter-rouge">Gemfile.lock</code> are part of Ruby programs distributed as “gems” (packages) via <a href="https://rubygems.org/">RubyGems package manager</a> and describe dependencies of a given gem like “command line Jekyll” (<a href="https://rubygems.org/gems/jekyll/">https://rubygems.org/gems/jekyll/</a>). Jekyll instruments its <code class="highlighter-rouge">Gemfile</code> <a href="https://jekyllrb.com/docs/ruby-101/#bundler">to make projects more portable</a> since the statements in the <code class="highlighter-rouge">Gemfile</code> define the environment that is required to run without errors - but effectively it can make projects less portable since a certain environment is required. In practice a <code class="highlighter-rouge">Gemfile</code> makes sense if you are using very special features of Jekyll, a theme, plugins etc. that may fail even with another version of Jekyll, a theme, plugins etc., but in that case you should be experienced enough to maintain a <code class="highlighter-rouge">Gemfile</code> that fits your needs on your own and better not rely on a default <code class="highlighter-rouge">Gemfile</code>, or in a special scenario where required “settings” are clearly given as for example <a href="https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/">local Jekyll vs. GitHub Pages</a> or for <a href="https://jekyllrb.com/docs/installation/windows/">Jekyll under Windows</a>.</li>
     </ul>
   </li>
-  <li>no <code class="highlighter-rouge">_posts</code> (not in the source directory and so not as default in the output)
+  <li>no <code class="highlighter-rouge">_posts</code>
     <ul>
       <li><code class="highlighter-rouge">_posts</code> is a crucial part in the design of Jekyll, but, on the one hand, may not be important for many environments, and, on the other hand, does not depend on a special position in the directory structure and should, also in this respect, be handled as rather content specific (like user defined <a href="https://jekyllrb.com/docs/collections/">Collections</a>).</li>
     </ul>
@@ -132,11 +132,11 @@
 <ul>
   <li><code class="highlighter-rouge">.md</code> instead of <code class="highlighter-rouge">*.html</code> in the source directory
     <ul>
-      <li>“.md” should say clearly “this is a source file”</li>
+      <li><code class="highlighter-rouge">.md</code> should say clearly “this is a source file”</li>
       <li><code class="highlighter-rouge">.md</code>’s typical file association to a Markdown editor should benefit your workflow</li>
       <li>:exclamation: note that this does not affect the functioning of includes concerning <a href="https://jekyllrb.com/docs/step-by-step/03-front-matter/">Front matter variables</a>
         <ul>
-          <li>Generally Jekyll doesn’t care about file extensions, i.e it opens all files in the source directory (that are not excluded by <code class="highlighter-rouge">_config.yml</code>) and parses those with textual content and processing Front matters and <a href="https://jekyllrb.com/docs/step-by-step/02-liquid/#tags">Liquid Tags</a>, but in files that are connectetd by the <a href="https://jekyllrb.com/docs/includes/"><code class="highlighter-rouge">include</code> tag</a> only tags are processed, but no Front matters, i.e. Front matters will be output as literal file content (if not encapsualed in a <a href="https://shopify.github.io/liquid/tags/comment/">comment tag</a> - note here that Liquid primarily is a “third party component” from Shopify what may explain the special behaviour with includes).</li>
+          <li>Generally Jekyll doesn’t care about file extensions, i.e it opens all files in the source directory (that are not excluded by <code class="highlighter-rouge">_config.yml</code>) and parses those who have textual content and processes their Front matters and <a href="https://jekyllrb.com/docs/step-by-step/02-liquid/#tags">Liquid Tags</a>, but in files that are connectetd via <a href="https://jekyllrb.com/docs/includes/"><code class="highlighter-rouge">include</code> tag</a> it processes only tags and no Front matters, i.e. Front matters will be output as literal file content (if not encapsualed in a <a href="https://shopify.github.io/liquid/tags/comment/">comment tag</a> - note here that Liquid primarily is a “third party component” from Shopify what may explain the divergent behaviour with includes).</li>
         </ul>
       </li>
     </ul>
@@ -144,11 +144,10 @@
   <li><a href="https://git-scm.com/docs/gitignore"><code class="highlighter-rouge">.gitignore</code></a>
     <ul>
       <li>no mention of <code class="highlighter-rouge">.sass-cache</code> since Sass cache is deactivated by <code class="highlighter-rouge">_config.yml</code></li>
-      <li><code class="highlighter-rouge">_site</code> commented out, uncomment with e.g. Git Hub Pages when developing with local builds, but pushing only source</li>
-      <li>explanations for entries as comments in file</li>
+      <li><code class="highlighter-rouge">_site</code> commented out, do uncomment it for e.g. Git Hub Pages when developing with local builds, but pushing only source</li>
     </ul>
   </li>
-  <li>… <code class="highlighter-rouge">_config.yml</code>… “description” etc. nach _data/presets.yml</li>
+  <li>… <code class="highlighter-rouge">_config.yml</code>… “description” etc. nach _data/presets.yml …xx……yYour awesome titley…</li>
 </ul>
 
 <h2 id="additions">Additions</h2>
@@ -159,6 +158,8 @@
   <li><code class="highlighter-rouge">presets.yml</code> in <code class="highlighter-rouge">_data</code> in the source directory
     <ul>
       <li>… “description” etc. aus <code class="highlighter-rouge">_config.yml</code> …</li>
+      <li>… ! https://jekyllrb.com/docs/datafiles/</li>
+      <li>… ! https://symfony.com/doc/current/components/yaml/yaml_format.html#collections …</li>
       <li><code class="highlighter-rouge">_config.yml</code> should configurate Jekyll, esp. the build process, but not content</li>
       <li>also to illustrate the mechanics</li>
     </ul>
@@ -203,6 +204,11 @@
         </ul>
       </li>
       <li>:bulb: the <code class="highlighter-rouge">-layout-</code> suffix makes explicit that this is a layout template - though that also follows directly from the containing directory and the utilisation by <code class="highlighter-rouge">layout: </code>, the suffix gives more overall transparency</li>
+    </ul>
+  </li>
+  <li>Hints, Don’t forgets, and references in all files
+    <ul>
+      <li>of course you may delete all of that, esp. if you are experienced enough and only interested in a small and empty scaffold</li>
     </ul>
   </li>
 </ul>

@@ -50,7 +50,7 @@ Coming near the **source** structure as depicted in [Jekyll's documentation](htt
     └── index.html
 ```
 
-... but still more reduced, and yet with the - standard Jekyll, but not mentioned above - "404" (here, same with "index", as MD, not HTML, see below), `presets.yml` in `_data, `main-head.md` and `main-` prefix in `_includes`, and `main-layout.md` instead of `default.html` in `_layouts` (see below), as well as, of course, `.gitignore`:
+... but still more reduced, and yet with the - standard Jekyll, but not mentioned above - "404" (like other files as MD, not HTML, see below), a new file `presets.yml` in `_data, `main-head.md` and `main-` prefix in `_includes`, and `main-layout.md` instead of `default.html` in `_layouts` (see below), as well as, of course, `.gitignore`:
 
 ---
 ```sh
@@ -84,7 +84,7 @@ The **output** structure and contents of the "empty" scaffold alone should be li
 ```
 ---
 
-Anything else that is output will come from your content, not from the scaffold or from hidden defaults like the [`jekyll feed` plugin](https://github.com/jekyll/jekyll-feed) - of course you may add such features as you like, but esp. a default feed mechanism you are not aware of might be a way to your data you are not aware of.
+Anything else that is output will come from your content, not from the scaffold or from hidden defaults like the [`jekyll feed` plugin](https://github.com/jekyll/jekyll-feed) - of course you may add such features as you like, but esp. a default feed mechanism you are not aware of might be a way to your data that you are not aware of.
 
 
 ## Prunings
@@ -98,8 +98,8 @@ Compared to `jekyll new`:
 * no Sass cache: adding [`cache: false` under `sass:` in `_config.yml`](https://github.com/jekyll/jekyll-sass-converter/issues/49#issuecomment-212600316)
     * effects in no `.sass-cache` in the source directory
 * no `Gemfile` / `Gemfile.lock` in the source directory
-    * A `Gemfile` and its accompanying `Gemfile.lock` are part of Ruby programs distributed as "gems" (packages) via [RubyGems package manager](https://rubygems.org/) and describe dependencies of a given gem like "command line Jekyll" (<https://rubygems.org/gems/jekyll/>). Jekyll instruments its `Gemfile` [to make projects more portable](https://jekyllrb.com/docs/ruby-101/#bundler) since the statements in the `Gemfile` define the environment that is required to run without errors - but effectively it can make projects less portable since a certain environment is required. In practice a `Gemfile` makes sense if you are using very special features of Jekyll, a theme, plugins etc. that may fail even with another version of Jekyll, a theme, plugins etc., but in that case you should be experienced enough to maintain a `Gemfile` that fits your needs on your own and better not rely on a default `Gemfile`, or if in a special scenario required "settings" are clearly given as for [local Jekyll vs. GitHub Pages](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/) or for [Jekyll under Windows](https://jekyllrb.com/docs/installation/windows/).
-* no `_posts` (not in the source directory and so not as default in the output)
+    * A `Gemfile` and its accompanying `Gemfile.lock` are part of Ruby programs distributed as "gems" (packages) via [RubyGems package manager](https://rubygems.org/) and describe dependencies of a given gem like "command line Jekyll" (<https://rubygems.org/gems/jekyll/>). Jekyll instruments its `Gemfile` [to make projects more portable](https://jekyllrb.com/docs/ruby-101/#bundler) since the statements in the `Gemfile` define the environment that is required to run without errors - but effectively it can make projects less portable since a certain environment is required. In practice a `Gemfile` makes sense if you are using very special features of Jekyll, a theme, plugins etc. that may fail even with another version of Jekyll, a theme, plugins etc., but in that case you should be experienced enough to maintain a `Gemfile` that fits your needs on your own and better not rely on a default `Gemfile`, or in a special scenario where required "settings" are clearly given as for example [local Jekyll vs. GitHub Pages](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/) or for [Jekyll under Windows](https://jekyllrb.com/docs/installation/windows/).
+* no `_posts`
     * `_posts` is a crucial part in the design of Jekyll, but, on the one hand, may not be important for many environments, and, on the other hand, does not depend on a special position in the directory structure and should, also in this respect, be handled as rather content specific (like user defined [Collections](https://jekyllrb.com/docs/collections/)).
 
 
@@ -108,16 +108,14 @@ Compared to `jekyll new`:
 Compared to `jekyll new`:
 
 * `.md` instead of `*.html` in the source directory
-    * ".md" should say clearly "this is a source file"
+    * `.md` should say clearly "this is a source file"
     * `.md`'s typical file association to a Markdown editor should benefit your workflow
     * :exclamation: note that this does not affect the functioning of includes concerning [Front matter variables](https://jekyllrb.com/docs/step-by-step/03-front-matter/)
-      * Generally Jekyll doesn't care about file extensions, i.e it opens all files in the source directory (that are not excluded by `_config.yml`) and parses those with textual content and processing Front matters and [Liquid Tags](https://jekyllrb.com/docs/step-by-step/02-liquid/#tags), but in files that are connectetd by the [`include` tag](https://jekyllrb.com/docs/includes/) only tags are processed, but no Front matters, i.e. Front matters will be output as literal file content (if not encapsualed in a [comment tag](https://shopify.github.io/liquid/tags/comment/) - note here that Liquid primarily is a "third party component" from Shopify what may explain the special behaviour with includes).
+      * Generally Jekyll doesn't care about file extensions, i.e it opens all files in the source directory (that are not excluded by `_config.yml`) and parses those who have textual content and processes their Front matters and [Liquid Tags](https://jekyllrb.com/docs/step-by-step/02-liquid/#tags), but in files that are connectetd via [`include` tag](https://jekyllrb.com/docs/includes/) it processes only tags and no Front matters, i.e. Front matters will be output as literal file content (if not encapsualed in a [comment tag](https://shopify.github.io/liquid/tags/comment/) - note here that Liquid primarily is a "third party component" from Shopify what may explain the divergent behaviour with includes).
 * [`.gitignore`](https://git-scm.com/docs/gitignore)
     * no mention of `.sass-cache` since Sass cache is deactivated by `_config.yml`
-    * `_site` commented out, uncomment with e.g. Git Hub Pages when developing with local builds, but pushing only source
-    * explanations for entries as comments in file
-* ... `_config.yml`... "description" etc. nach _data/presets.yml
-
+    * `_site` commented out, do uncomment it for e.g. Git Hub Pages when developing with local builds, but pushing only source
+* ... `_config.yml`... "description" etc. nach _data/presets.yml ...x{{ site.title}}x......y{{ site.data.presets.page.title}}y...
 
 ## Additions
 
@@ -125,6 +123,8 @@ Compared to `jekyll new`:
 
 * `presets.yml` in `_data` in the source directory
     * ... "description" etc. aus `_config.yml` ...
+    * ... ! https://jekyllrb.com/docs/datafiles/
+    * ... ! https://symfony.com/doc/current/components/yaml/yaml_format.html#collections ...
     * `_config.yml` should configurate Jekyll, esp. the build process, but not content
     * also to illustrate the mechanics
 * `_includes` in the source directory with
@@ -145,6 +145,8 @@ Compared to `jekyll new`:
         * "default" suggests "failed to provide a more suitable solution"
             * a "default.html" would make sense if this file would step in if no layout was explicitly specified, but, on the contrary, you need to explicitly define "default" to use it
     * :bulb: the `-layout-` suffix makes explicit that this is a layout template - though that also follows directly from the containing directory and the utilisation by `layout: `, the suffix gives more overall transparency
+* Hints, Don't forgets, and references in all files
+    * of course you may delete all of that, esp. if you are experienced enough and only interested in a small and empty scaffold
 
 
 ## WONTFIX
