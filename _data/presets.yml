@@ -1,3 +1,24 @@
-# a comment here
-page: # a comment there
+# see https://github.com/jekyll/jekyll-seo-tag
+# see https://stackoverflow.com/questions/3790454/in-yaml-how-do-i-break-a-string-over-multiple-lines#answer-21699210
+#
+page:
   title: Your awesome title
+  description: "Das Sprachforum Heinrich Heine in Düsseldorf ist auf Deutschkurse spezialisiert (Deutsch als Fremdsprache). Unternehmen Sie eine Sprachreise nach Düsseldorf am Rhein (z.B. via Flughafen Düsseldorf oder Köln / Bonn). Düsseldorf ist die Landeshauptstadt von Nordrhein-Westfalen."
+# <title>Deutschkurse. Deutsch lernen. Unterricht Deutsch. Düsseldorf</title>
+# <meta name="generator" content="TYPO3 4.3 CMS" />
+# <meta name="keywords" content="Deutschkurse. Deutsch lernen. Unterricht Deutsch. Düsseldorf, deutschkurse, intensivkurse, sprachkurse, unterricht, sommerkurse, testdaf, abendkurse, prüfung, vorbereitung, sprachforum, düsseldorf, heine, universität, studium, beruf" />
+# <meta name="page-topic" content="Deutschkurse. Deutsch lernen. Unterricht Deutsch. Düsseldorf, Die Sprachschule für Deutschkurse in Düsseldorf. Sprachunterricht. Deutschkurse. Deutsch für Ausländer. Deutsch lernen." />
+# <link rel="shortcut icon" href="http://typo3.p117808.mittwaldserver.info/favicon.ico" />
+# <link rel="icon" href="http://typo3.p117808.mittwaldserver.info/favicon.ico" />
+
+# <meta http-equiv="Content-Type" content="text/html;" />
+# <meta name="author" content="Sprachforum Heinrich Heine" />
+# <meta name="language" content="de" />
+# <meta http-equiv="Content-Language" content="de" />
+# <meta http-equiv="expires" content="0" />
+# <meta name="publisher" content="Sprachforum Heinrich Heine" />
+# <meta name="copyright" content="© 2010-2016 Sprachforum Heinrich Heine" />
+# <meta name="page-type" content="Kommerzielle Organisation" />
+# <meta name="audience" content="Studenten, Studienbewerber, Universität, Schüler, Spanien-Reisender" />
+# <meta name="robots" content="index, follow, noodp" />
+# <meta name="revisit-after" content="1 days" />		  

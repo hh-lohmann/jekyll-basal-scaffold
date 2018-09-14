@@ -3,6 +3,10 @@
 
 <head>
   <title>jkBS - jekyll-basal-scaffold - A basal, transparent, and portable scaffold for Jekyll (NOT A THEME)</title>
+  
+    <!-- das sollte man natürlich noch konfliktfreier machen, z.B. durch Einfügen einer Grafik, die kaum überschrieben werden dürfte => Grafik als Base64, damit keine externe Datei erforderlich ist -->
+    <style>body{border-left: 2em solid brown;padding-left:1em;}</style>
+  
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -11,6 +15,7 @@
 <header>
 </header><main class="page-content" aria-label="Content">
       <div class="wrapper">
+        
         <hr />
 
 <p>sources: https://github.com/hh-lohmann/jekyll-basal-scaffold</p>
@@ -31,9 +36,9 @@
 
 <h2 id="background">Background</h2>
 
-<p><code class="highlighter-rouge">jekyll new</code> creates an environment with rather demonstrational and often unneeded stuff, while at the same time some things seem to miss. A top example is Jekyll’s default <a href="https://github.com/jekyll/minima">minima</a> theme that at the same time produces an <code class="highlighter-rouge">assets</code> directory in the output while hiding important mechanics like the <code class="highlighter-rouge">_includes</code> and <code class="highlighter-rouge">_layouts</code> folders in its <a href="https://guides.rubygems.org/command-reference/#gem-environment">RubyGems <code class="highlighter-rouge">gemdir</code> directory</a>. This may hinder quick understanding for what’s going on under the hood and of course is not portable at all (see considerations for the <code class="highlighter-rouge">Gemfile</code> below).</p>
+<p><code class="highlighter-rouge">jekyll new</code> creates an environment with rather demonstrational and often unneeded stuff, while at the same time some things seem to miss. A top example is Jekyll’s default theme <a href="https://github.com/jekyll/minima">minima</a> that at the same time produces an <code class="highlighter-rouge">assets</code> directory in the output while hiding important mechanics like the <code class="highlighter-rouge">_includes</code> and <code class="highlighter-rouge">_layouts</code> folders in its <a href="https://guides.rubygems.org/command-reference/#gem-environment">RubyGems <code class="highlighter-rouge">gemdir</code> directory</a>. This may hinder quick understanding for what’s going on under the hood and of course is not portable at all (see considerations for the <code class="highlighter-rouge">Gemfile</code> below).</p>
 
-<p>Note that the <a href="https://github.com/jekyll/jekyll/blob/0728ccf08b08759d75b6bac40091151a80556565/lib/jekyll/commands/new.rb#L15"><code class="highlighter-rouge">--blank</code> option</a> for <code class="highlighter-rouge">jekyll new</code> gives you a source directory without a theme and its impacts, but also without <code class="highlighter-rouge">_includes</code> and some other things.</p>
+<p>Note that the <a href="https://github.com/jekyll/jekyll/blob/0728ccf08b08759d75b6bac40091151a80556565/lib/jekyll/commands/new.rb#L15"><code class="highlighter-rouge">--blank</code> option</a> for <code class="highlighter-rouge">jekyll new</code> gives you a source directory without a theme and its impacts, but also without <code class="highlighter-rouge">_includes</code> and some other things (see the <a href="https://github.com/jekyll/jekyll/tree/master/lib/site_template">site_template on GitHub</a>).</p>
 
 <h2 id="goal">Goal</h2>
 
@@ -63,19 +68,20 @@
     └── index.html
 </code></pre></div></div>
 
-<p>… but still more reduced, and yet with the - standard Jekyll, but not mentioned above - “404” (like other files as MD, not HTML, see below), a new file <code class="highlighter-rouge">presets.yml</code> in <code class="highlighter-rouge">_data, </code>main-head.md<code class="highlighter-rouge"> and </code>main-<code class="highlighter-rouge"> prefix in </code>_includes<code class="highlighter-rouge">, and </code>main-layout.md<code class="highlighter-rouge"> instead of </code>default.html<code class="highlighter-rouge"> in </code>_layouts<code class="highlighter-rouge"> (see below), as well as, of course, </code>.gitignore`:</p>
+<p>… but still more reduced, and yet with the - standard Jekyll, but not mentioned above - “404” (like other files as MD, not HTML, see below), a new file <code class="highlighter-rouge">presets.yml</code> in <code class="highlighter-rouge">_data</code>, <code class="highlighter-rouge">head.md</code> and <code class="highlighter-rouge">main</code> folder in <code class="highlighter-rouge">_includes</code>, and <code class="highlighter-rouge">main.md</code> instead of <code class="highlighter-rouge">default.html</code> in <code class="highlighter-rouge">_layouts</code> (see below), as well as, of course, <code class="highlighter-rouge">.gitignore</code>:</p>
 
 <hr />
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">.</span>
     ├── _config.yml
     ├── _data
-    |   ├── presets.yml
+    |   └── presets.yml
     ├── _includes
-    |   ├── main-footer.md
-    |   └── main-head.md
-    |   └── main-header.md
+    |   └── _main-layout
+    |       ├── footer.md
+    |       ├── head.md
+    |       └── header.md
     ├── _layouts
-    |   ├── main-layout.md
+    |   └── main-layout.md
     ├── _site
     ├── .gitignore
     ├── .jekyll-metadata
@@ -112,12 +118,12 @@
 <p>Compared to <code class="highlighter-rouge">jekyll new</code>:</p>
 
 <ul>
-  <li>theme (mimima): deleting <code class="highlighter-rouge">minima</code> for <code class="highlighter-rouge">theme:</code> in <code class="highlighter-rouge">_config.yml</code>
+  <li>theme (mimima): deleting <code class="highlighter-rouge">theme:</code> key in <code class="highlighter-rouge">_config.yml</code> (including value <code class="highlighter-rouge">minima</code>)
     <ul>
       <li>effects in no <code class="highlighter-rouge">about.md</code> in the source directory and no <code class="highlighter-rouge">about</code> and <code class="highlighter-rouge">assets</code> in the output</li>
     </ul>
   </li>
-  <li>feeds: deleting <code class="highlighter-rouge">-jekyll-feed</code> under <code class="highlighter-rouge">plugins:</code> in <code class="highlighter-rouge">_config.yml</code>
+  <li>feeds: deleting <code class="highlighter-rouge">plugins:</code> key in <code class="highlighter-rouge">_config.yml</code> (including <code class="highlighter-rouge">-jekyll-feed</code>)
     <ul>
       <li>effects in no <code class="highlighter-rouge">feed.xml</code> in the output</li>
     </ul>
@@ -125,6 +131,11 @@
   <li>no Sass cache: adding <a href="https://github.com/jekyll/jekyll-sass-converter/issues/49#issuecomment-212600316"><code class="highlighter-rouge">cache: false</code> under <code class="highlighter-rouge">sass:</code> in <code class="highlighter-rouge">_config.yml</code></a>
     <ul>
       <li>effects in no <code class="highlighter-rouge">.sass-cache</code> in the source directory</li>
+      <li>note that Jekyll hat Sass support <a href="https://jekyllrb.com/docs/assets/">built in</a> and that a <code class="highlighter-rouge">.sass-cache</code> dir would result even if you might have no idea what Sass is
+        <ul>
+          <li>if you enjoy Sass, you should have or strive for enough know-how to make things appropriate without default dirs</li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li>no <code class="highlighter-rouge">Gemfile</code> / <code class="highlighter-rouge">Gemfile.lock</code> in the source directory
@@ -150,7 +161,13 @@
       <li><code class="highlighter-rouge">.md</code>’s typical file association to a Markdown editor should benefit your workflow</li>
       <li>:exclamation: note that this does not affect the functioning of includes concerning <a href="https://jekyllrb.com/docs/step-by-step/03-front-matter/">Front matter variables</a>
         <ul>
-          <li>Generally Jekyll doesn’t care about file extensions, i.e it opens all files in the source directory (that are not excluded by <code class="highlighter-rouge">_config.yml</code>) and parses those who have textual content and processes their Front matters and <a href="https://jekyllrb.com/docs/step-by-step/02-liquid/#tags">Liquid Tags</a>, but in files that are connectetd via <a href="https://jekyllrb.com/docs/includes/"><code class="highlighter-rouge">include</code> tag</a> it processes only tags and no Front matters, i.e. Front matters will be output as literal file content (if not encapsualed in a <a href="https://shopify.github.io/liquid/tags/comment/">comment tag</a> - note here that Liquid primarily is a “third party component” from Shopify what may explain the divergent behaviour with includes).</li>
+          <li>Generally Jekyll doesn’t care about file extensions, i.e it opens all files in the source directory (that are not excluded by <code class="highlighter-rouge">_config.yml</code>) and parses those who have textual content and processes their Front matters and <a href="https://jekyllrb.com/docs/step-by-step/02-liquid/#tags">Liquid Tags</a>, but in files that are connectetd via <a href="https://jekyllrb.com/docs/includes/"><code class="highlighter-rouge">include</code> tag</a> it processes only tags and no Front matters, i.e. Front matters will be output as literal file content (if not encapsualed in a <a href="https://shopify.github.io/liquid/tags/comment/">comment tag</a> - note here that Liquid primarily is a “third party component” from Shopify what may explain the divergent behaviour with includes).
+            <ul>
+              <li>Note that there are no <a href="https://jekyllrb.com/docs/variables/">Jekyll Variables</a> concerning includes</li>
+              <li>Compare <a href="https://jekyllrb.com/tutorials/orderofinterpretation/">Jekyll’s Order of Interpretation</a></li>
+            </ul>
+          </li>
+          <li><a href="https://jekyllrb.com/tutorials/orderofinterpretation/#markdown-in-include-file-not-processed">Parts of the Jekyll docs</a> name a difference between Markdown files and “HTML files” without stating what defines an “HTML file”, but clearly it is not the file extension that decides</li>
         </ul>
       </li>
     </ul>
@@ -163,29 +180,86 @@
   </li>
   <li><code class="highlighter-rouge">_config.yml</code>
     <ul>
-      <li><code class="highlighter-rouge">exclude:</code>
+      <li><em>Guidelines</em>
         <ul>
-          <li><code class="highlighter-rouge">- LICENSE</code>
+          <li>frequently updated settings in data files, not in <code class="highlighter-rouge">_config.yml</code>
             <ul>
-              <li>this repo’s license of course has little to with your output content
-                <ul>
-                  <li>but DO NOT DELETE LICENSE FILES neither in this repo nor in others, as in most cases you are not allowed to use / fork the repo without a copy of LICENSE</li>
-                </ul>
-              </li>
+              <li>cf. the out-of-the-box <code class="highlighter-rouge">_config.yml</code>: “If you find yourself editing this file very often, consider using Jekyll’s data files feature for the data you need to update frequently.”</li>
             </ul>
           </li>
-          <li><code class="highlighter-rouge">- README.md</code>
+          <li><code class="highlighter-rouge">_config.yml</code> should house settings, data should go to data files
             <ul>
-              <li>the README is meant for dealing with the repo, not for the audience or purpose of your output
+              <li>data concern content</li>
+              <li>settings concern build options and defaults
                 <ul>
-                  <li>but do not delete it since it contains valuable information</li>
+                  <li>note that defaults for Front matters should also count as rather content related, but they only work as settings in <code class="highlighter-rouge">_config.yml</code></li>
                 </ul>
               </li>
             </ul>
           </li>
         </ul>
       </li>
-      <li>… “description” etc. nach _data/presets.yml …xx……yYour awesome titley…</li>
+      <li>added
+        <ul>
+          <li><code class="highlighter-rouge">exclude:</code>
+            <ul>
+              <li><code class="highlighter-rouge">- LICENSE</code>
+                <ul>
+                  <li>this repo’s license of course has little to with your output content
+                    <ul>
+                      <li>but DO NOT DELETE LICENSE FILES neither in this repo nor in others, as in most cases you are not allowed to use / fork the repo without a copy of LICENSE</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><code class="highlighter-rouge">- README.md</code>
+                <ul>
+                  <li>the README is meant for dealing with the repo, not for the audience or purpose of your output
+                    <ul>
+                      <li>but do not delete it since it contains valuable information</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>moved
+        <ul>
+          <li><code class="highlighter-rouge">description:</code> to <code class="highlighter-rouge">meta:</code> in _data/presets.yml (see there)</li>
+        </ul>
+      </li>
+      <li>deleted (alphabetical order)
+        <ul>
+          <li><code class="highlighter-rouge">baseurl:</code> - not necessary since not used anywhere
+            <ul>
+              <li>note: has nothing to do with the <a href="https://developer.mozilla.org/de/docs/Web/HTML/Element/base">HTML base tag </a></li>
+            </ul>
+          </li>
+          <li><code class="highlighter-rouge">email:</code> - not necessary since not used anywhere
+            <ul>
+              <li>contained in the out-of-the-box <code class="highlighter-rouge">_config.yml</code> for theme <code class="highlighter-rouge">minima</code>, not for Jekyll itself</li>
+            </ul>
+          </li>
+          <li><code class="highlighter-rouge">markdown:</code> (with value <code class="highlighter-rouge">kramdown</code>) - technically not necessary
+            <ul>
+              <li>Jekyll uses kramdown  <a href="https://jekyllrb.com/docs/configuration/markdown/#kramdown">by default</a>, i.e. you neither have to specify kramdown nor <code class="highlighter-rouge">markdown:</code> at all</li>
+              <li>note that kramdown’s “non-standard” Markdown features raises no problems since, with Jekyll, you would at most interchange Markdown files with other Jekyll environments that run also kramdown</li>
+            </ul>
+          </li>
+          <li><code class="highlighter-rouge">title:</code> - not necessary since not used anywhere
+            <ul>
+              <li>contained in the out-of-the-box <code class="highlighter-rouge">_config.yml</code> for theme <code class="highlighter-rouge">minima</code>, not for Jekyll itself</li>
+            </ul>
+          </li>
+          <li><code class="highlighter-rouge">url:</code> - not necessary since not used anywhere
+            <ul>
+              <li>contained in the out-of-the-box <code class="highlighter-rouge">_config.yml</code> for theme <code class="highlighter-rouge">minima</code>, not for Jekyll itself</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
@@ -238,7 +312,12 @@
           <li>note that in the proper technical definition a “default” may be exactly a case that never happens in reality</li>
           <li>“default” suggests “failed to provide a more suitable solution”
             <ul>
-              <li>a “default.html” would make sense if this file would step in if no layout was explicitly specified, but, on the contrary, you need to explicitly define “default” to use it</li>
+              <li>a “default.html” would make sense if this file would step in if no layout was explicitly specified, but, on the contrary, you need to explicitly define “default” to use it
+                <ul>
+                  <li>a real default layout may be defined by a <a href="https://jekyllrb.com/docs/configuration/front-matter-defaults/">Front matter default</a></li>
+                  <li>compare the <a href="https://shopify.github.io/liquid/filters/default/">default <em>filter</em></a> that throws in a value if a required variable is empty, but also note that this might hide deeper errors and misconfigurations</li>
+                </ul>
+              </li>
             </ul>
           </li>
         </ul>
@@ -259,7 +338,7 @@
   <li>no css, no js, no metadata, no libraries, no frameworks, no tools, no hooks, no admin, no preconfiguration</li>
 </ul>
 
-<p>This scaffold has to be basal, transparent, and portable. There should be no purpose or use case built in, it should rather be possible to use it even to compose program code out of building blocks, databases, <a href="https://www.graphviz.org/">dot graph</a> layouts, or anything else that has no deeper relationship to webpages and their properties besides that a web browser should be able to display it. So any “helpful preconfiguration” or anything that looks like will lead to something else and WILL NOT happen here.</p>
+<p>This scaffold has to be basal, transparent, and portable. There should be no purpose or use case built in, it should rather be possible to use it for databases, databanks, data collection systems, or even to compose program code out of building blocks or <a href="https://www.graphviz.org/">dot graph</a> layouts, or anything else that has no deeper relationship to webpages or something to display in web browser. So any “helpful preconfiguration” or anything that looks like will lead to something else and WILL NOT happen here.</p>
 
 <p>Pure skeleton, no flesh.</p>
 

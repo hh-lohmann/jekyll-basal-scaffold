@@ -1,55 +1,67 @@
+# ---
+# sources:
+#   jkBS: https://github.com/hh-lohmann/jekyll-basal-scaffold,
+#   jekyllGitHub:
+#     used version:  https://github.com/jekyll/jekyll/blob/495456bb3cf5e53992af1a395120a4a37b676be8/lib/site_template/_config.yml
+#     latest version: https://github.com/jekyll/jekyll/blob/master/lib/site_template/_config.yml
+# references:
+#   jekyllDocs: https://jekyllrb.com/docs/configuration/
+# ---
 #
-# sources: https://github.com/hh-lohmann/jekyll-basal-scaffold, https://jekyllrb.com/
 #
-# you may refer to https://jekyllrb.com/docs/configuration/
+# # "Core settings" for Jekyll (build, globals, collections, defaults)
+# 
+#     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#        Changing settings here requires a new build (jekyll b / jekyll s)
+#     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #
-# Welcome to Jekyll!
 #
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
+# # Build options
 #
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+# ## Excludes
+#
+# Files that must be present in the source directory, but must not be output
 
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-### title: Your awesome title
-email: your-email@example.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-
-# Build settings
-markdown: kramdown
-plugins:
-
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
 exclude:
   - LICENSE
   - README.md
 
-permalink: /:categories/:class/:title
+# ## No .sass-cache
+#
+# Prevent default .sass-cache directory in the source directory to keep things clear
+
+sass:
+  cache: false
+
+# # Global variables
+#
+# ## Permalink
+#
+# see 
+#
+# permalink: ....
+
+
+# Collections
+# see https://jekyllrb.com/docs/collections/#collections
+# !! permalink in Abhängigkeit von collection => Front Matter Defaults: scope
 collections:
   roadmap:
     output: true
     permalink: /:categories/:title/
-sass:
-  cache: false
+
+
+# # Front Matter Defaults
+#
+# see https://jekyllrb.com/docs/configuration/front-matter-defaults/
+#
+#
+
+
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: main
+

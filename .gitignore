@@ -1,5 +1,6 @@
 # sources: https://github.com/hh-lohmann/jekyll-basal-scaffold, https://jekyllrb.com/
 #
+# compare https://github.com/jekyll/jekyll/blob/master/lib/site_template/.gitignore
 # jekyll-basal-scaffold/.gitignore
 # cf. https://git-scm.com/docs/gitignore
 # Exclude Jekyll's track keeping for builds
