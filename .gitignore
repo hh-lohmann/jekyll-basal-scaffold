@@ -1,0 +1,11 @@
+# sources: https://github.com/hh-lohmann/jekyll-basal-scaffold, https://jekyllrb.com/
+#
+# jekyll-basal-scaffold/.gitignore
+# cf. https://git-scm.com/docs/gitignore
+# Exclude Jekyll's track keeping for builds
+#  * This file might not exist at all / for other reasons
+.jekyll-metadata
+# Exclude Jekyll's output directory
+## * uncomment with e.g. Git Hub Pages when developing with local builds, but pushing only source
+## * comment out with e.g. Bitbucket Pages where you need to build local
+# _site
