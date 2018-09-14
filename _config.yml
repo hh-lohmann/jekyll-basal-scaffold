@@ -42,6 +42,9 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+exclude:
+  - LICENSE
+  - README.md
 
 permalink: /:categories/:class/:title
 collections:

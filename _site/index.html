@@ -25,6 +25,10 @@
 
 <p>Meant for a quick initialization of a full functional <a href="https://jekyllrb.com/">Jekyll</a> environment without stumbling over the fuzzes of <em>feature packed</em> themes and dependencies.</p>
 
+<h2 id="tldr"><em>TL;DR</em></h2>
+
+<p>A plain directory structure for Jekyll projects that you can directly <a href="https://github.com/hh-lohmann/jekyll-basal-scaffold/archive/master.zip">download</a></p>
+
 <h2 id="background">Background</h2>
 
 <p><code class="highlighter-rouge">jekyll new</code> creates an environment with rather demonstrational and often unneeded stuff, while at the same time some things seem to miss. A top example is Jekyll’s default <a href="https://github.com/jekyll/minima">minima</a> theme that at the same time produces an <code class="highlighter-rouge">assets</code> directory in the output while hiding important mechanics like the <code class="highlighter-rouge">_includes</code> and <code class="highlighter-rouge">_layouts</code> folders in its <a href="https://guides.rubygems.org/command-reference/#gem-environment">RubyGems <code class="highlighter-rouge">gemdir</code> directory</a>. This may hinder quick understanding for what’s going on under the hood and of course is not portable at all (see considerations for the <code class="highlighter-rouge">Gemfile</code> below).</p>
@@ -93,6 +97,16 @@
 
 <p>Anything else that is output will come from your content, not from the scaffold or from hidden defaults like the <a href="https://github.com/jekyll/jekyll-feed"><code class="highlighter-rouge">jekyll feed</code> plugin</a> - of course you may add such features as you like, but esp. a default feed mechanism you are not aware of might be a way to your data that you are not aware of.</p>
 
+<h3 id="flavors">Flavors?</h3>
+
+<p><em>RTFM</em>: flavored to be basal AND transparent AND portable</p>
+<ul>
+  <li>Allergics may replace all <em>files</em> completey by own ones, the sole directory structure should not smell</li>
+  <li>OK: pure _post’er boys and girls are not addressed by this project</li>
+</ul>
+
+<p>Note that some file extensions here (see below) differ from some examples in the Jekyll docs, but this should even lead to a better understanding of the docs.</p>
+
 <h2 id="prunings">Prunings</h2>
 
 <p>Compared to <code class="highlighter-rouge">jekyll new</code>:</p>
@@ -147,7 +161,33 @@
       <li><code class="highlighter-rouge">_site</code> commented out, do uncomment it for e.g. Git Hub Pages when developing with local builds, but pushing only source</li>
     </ul>
   </li>
-  <li>… <code class="highlighter-rouge">_config.yml</code>… “description” etc. nach _data/presets.yml …xx……yYour awesome titley…</li>
+  <li><code class="highlighter-rouge">_config.yml</code>
+    <ul>
+      <li><code class="highlighter-rouge">exclude:</code>
+        <ul>
+          <li><code class="highlighter-rouge">- LICENSE</code>
+            <ul>
+              <li>this repo’s license of course has little to with your output content
+                <ul>
+                  <li>but DO NOT DELETE LICENSE FILES neither in this repo nor in others, as in most cases you are not allowed to use / fork the repo without a copy of LICENSE</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><code class="highlighter-rouge">- README.md</code>
+            <ul>
+              <li>the README is meant for dealing with the repo, not for the audience or purpose of your output
+                <ul>
+                  <li>but do not delete it since it contains valuable information</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>… “description” etc. nach _data/presets.yml …xx……yYour awesome titley…</li>
+    </ul>
+  </li>
 </ul>
 
 <h2 id="additions">Additions</h2>
@@ -231,7 +271,7 @@
   <li>Change / add / delete files and their contents depending on your needs
     <ul>
       <li>… besides this README file and the …COPYING file …</li>
-      <li>tip: have a look at <a href="https://jekyllrb.com/docs/configuration/">Jekyll’s manifold options and / or flags</a> for the de- / construction of content
+      <li>tip: have a look at <a href="https://jekyllrb.com/docs/configuration/">Jekyll’s manifold options and / or flags</a> for the de- / construction and organisation of content
         <ul>
           <li>esp. the <code class="highlighter-rouge">--config</code> option could be worth for a look</li>
         </ul>

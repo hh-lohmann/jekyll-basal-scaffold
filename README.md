@@ -14,6 +14,11 @@ sources: https://github.com/hh-lohmann/jekyll-basal-scaffold
 Meant for a quick initialization of a full functional [Jekyll](https://jekyllrb.com/) environment without stumbling over the fuzzes of *feature packed* themes and dependencies.
 
 
+## *TL;DR*
+
+A plain directory structure for Jekyll projects that you can directly [download](https://github.com/hh-lohmann/jekyll-basal-scaffold/archive/master.zip) 
+
+
 ## Background
 
 `jekyll new` creates an environment with rather demonstrational and often unneeded stuff, while at the same time some things seem to miss. A top example is Jekyll's default [minima](https://github.com/jekyll/minima) theme that at the same time produces an `assets` directory in the output while hiding important mechanics like the `_includes` and `_layouts` folders in its [RubyGems `gemdir` directory](https://guides.rubygems.org/command-reference/#gem-environment). This may hinder quick understanding for what's going on under the hood and of course is not portable at all (see considerations for the `Gemfile` below).
@@ -93,6 +98,8 @@ Anything else that is output will come from your content, not from the scaffold 
 * Allergics may replace all *files* completey by own ones, the sole directory structure should not smell
 * OK: pure \_post'er boys and girls are not addressed by this project
 
+Note that some file extensions here (see below) differ from some examples in the Jekyll docs, but this should even lead to a better understanding of the docs.
+
 
 ## Prunings
 
@@ -122,7 +129,15 @@ Compared to `jekyll new`:
 * [`.gitignore`](https://git-scm.com/docs/gitignore)
     * no mention of `.sass-cache` since Sass cache is deactivated by `_config.yml`
     * `_site` commented out, do uncomment it for e.g. Git Hub Pages when developing with local builds, but pushing only source
-* ... `_config.yml`... "description" etc. nach _data/presets.yml ...x{{ site.title}}x......y{{ site.data.presets.page.title}}y...
+* `_config.yml`
+    * `exclude:`
+        * `- LICENSE`
+          * this repo's license of course has little to with your output content
+            * but DO NOT DELETE LICENSE FILES neither in this repo nor in others, as in most cases you are not allowed to use / fork the repo without a copy of LICENSE
+        * `- README.md`
+          * the README is meant for dealing with the repo, not for the audience or purpose of your output
+            * but do not delete it since it contains valuable information
+    * ... "description" etc. nach _data/presets.yml ...x{{ site.title}}x......y{{ site.data.presets.page.title}}y...
 
 ## Additions
 
