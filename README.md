@@ -87,6 +87,13 @@ The **output** structure and contents of the "empty" scaffold alone should be li
 Anything else that is output will come from your content, not from the scaffold or from hidden defaults like the [`jekyll feed` plugin](https://github.com/jekyll/jekyll-feed) - of course you may add such features as you like, but esp. a default feed mechanism you are not aware of might be a way to your data that you are not aware of.
 
 
+### Flavors?
+
+*RTFM*: flavored to be basal AND transparent AND portable
+* Allergics may replace all *files* completey by own ones, the sole directory structure should not smell
+* OK: pure \_post'er boys and girls are not addressed by this project
+
+
 ## Prunings
 
 Compared to `jekyll new`:
@@ -111,7 +118,7 @@ Compared to `jekyll new`:
     * `.md` should say clearly "this is a source file"
     * `.md`'s typical file association to a Markdown editor should benefit your workflow
     * :exclamation: note that this does not affect the functioning of includes concerning [Front matter variables](https://jekyllrb.com/docs/step-by-step/03-front-matter/)
-      * Generally Jekyll doesn't care about file extensions, i.e it opens all files in the source directory (that are not excluded by `_config.yml`) and parses those who have textual content and processes their Front matters and [Liquid Tags](https://jekyllrb.com/docs/step-by-step/02-liquid/#tags), but in files that are connectetd via [`include` tag](https://jekyllrb.com/docs/includes/) it processes only tags and no Front matters, i.e. Front matters will be output as literal file content (if not encapsualed in a [comment tag](https://shopify.github.io/liquid/tags/comment/) - note here that Liquid primarily is a "third party component" from Shopify what may explain the divergent behaviour with includes).
+        * Generally Jekyll doesn't care about file extensions, i.e it opens all files in the source directory (that are not excluded by `_config.yml`) and parses those who have textual content and processes their Front matters and [Liquid Tags](https://jekyllrb.com/docs/step-by-step/02-liquid/#tags), but in files that are connectetd via [`include` tag](https://jekyllrb.com/docs/includes/) it processes only tags and no Front matters, i.e. Front matters will be output as literal file content (if not encapsualed in a [comment tag](https://shopify.github.io/liquid/tags/comment/) - note here that Liquid primarily is a "third party component" from Shopify what may explain the divergent behaviour with includes).
 * [`.gitignore`](https://git-scm.com/docs/gitignore)
     * no mention of `.sass-cache` since Sass cache is deactivated by `_config.yml`
     * `_site` commented out, do uncomment it for e.g. Git Hub Pages when developing with local builds, but pushing only source
@@ -164,7 +171,7 @@ Pure skeleton, no flesh.
 2. Check `.gitignore` for possible adjustments (see above)
 3. Change / add / delete files and their contents depending on your needs
     * ... besides this README file and the ...COPYING file ...
-    * tip: have a look at [Jekyll's manifold options and / or flags](https://jekyllrb.com/docs/configuration/) for the de- / construction of content
+    * tip: have a look at [Jekyll's manifold options and / or flags](https://jekyllrb.com/docs/configuration/) for the de- / construction and organisation of content
       * esp. the `--config` option could be worth for a look
 
 Be aware that `404.html` in the output without any [further steps](https://jekyllrb.com/tutorials/custom-404-page/) only works under GitHub Pages and Ruby's [WEBrick server](http://ruby-doc.org/stdlib-2.0.0/libdoc/webrick/rdoc/WEBrick.html) behind `jekyll serve`. Including a 404 in the scaffold mainly is a strong reminder to not forget something that catches typos etc.
