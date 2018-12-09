@@ -4,7 +4,13 @@ sources: https://github.com/hh-lohmann/jekyll-basal-scaffold
 
 ---
 
-.... ! jkBS als Präfix einschmuggeln als Wiedererkennungswert - oder "hh"? ... oder "nat" für "NOT A THEME" ...
+[TODO]:<f>
+
+  [ !jkBS als Präfix einschmuggeln als Wiedererkennungswert - oder "hh"? ]: #
+
+  [ oder "nat" für "NOT A THEME" ]: #
+
+[/TODO]:</f>
 
 # jekyll-basal-scaffold (jkBS)
 
